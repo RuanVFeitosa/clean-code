@@ -32,6 +32,51 @@ userControllers = {
                 message: "Erro ao tentar atualizar usuario"
             });
         }
+    },
+
+    getAll: async (req, res) => {
+        try {
+            const users = await userService.getAll();
+            return res.status(200).json({
+                message: "Usuarios encontrados com sucesso",
+                users
+            })
+        } catch {
+            return res.status(500).json({
+                message: "Ocorreu um erro no Servidor   "
+            })
+        }
+    },
+    getOne: async (req, res) => {
+        try {
+            const user = await userService.getById(req.params.id);
+            if (!user) {
+                return res.status(200).json({
+                    message: "Usuario encontrado com sucesso",
+                    user
+                })
+            }
+
+        } catch (error) {
+            return res.status(500).json({
+                message: "Ocorreu um erro no Servidor"
+            })
+
+        }
+    }, 
+    delete: async(req, res) => {
+        try {
+             await userService.delete(req.params.id);
+             if (!user) {
+                 return res.status(200).json({
+                    message: "Usuario deletado com sucesso"
+                 })
+             }
+        } catch{
+            return res.status(500).json({
+            message: "Ocorreu um erro no Servidor"
+            })
+        }
     }
 }
 
