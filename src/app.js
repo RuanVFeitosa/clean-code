@@ -18,6 +18,7 @@ app.use(express.json()); // Resposta via JSON
 sequelize.authenticate()
     .then(() => {
         console.log('Conexão com banco de dados realizada com sucesso!');
+        sequelize.sync()
     })
     .catch(err => {
         console.log('Erro ao conectar com banco de dados:', err);
