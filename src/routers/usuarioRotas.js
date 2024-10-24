@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const userController = require('../controllers/userController')
-const { validateUser, validateUserId }= require ('../middlewares/validateUser')
+const { validateUser, validateUserId }= require ('../middlewares/validateUser');
+const authenticateToken = require('../middlewares/validateToken');
 
 const router = Router();
 
@@ -11,7 +12,7 @@ router.post('/', validateUser, userController.create)
 router.put('/:id', validateUser, validateUserId, userController.update) // Paramentro id
 
 // Função de deletar
-router.delete('/:id', validateUserId, userController.delete) // Paramentro id
+router.delete('/:id', authenticateToken, validateUserId, userController.delete) // Paramentro id
 
 // Função buscar unico
 router.get('/:id', validateUserId, userController.getOne ) // Paramentro id

@@ -42,12 +42,14 @@ const userService = {
     },
     delete: async (id) => {
         try {
+
             const user = await User.findByPk(id)
             if (!user) {
                 return null;
             }
-            await user.destroy()
-            return user
+
+            return await user.destroy()
+            
         } catch {
             throw new Error('Ocorreu um erro ao deletar User')
         }

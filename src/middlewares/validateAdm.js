@@ -11,7 +11,7 @@ const validateAdm = (req, res, next) => {
 
     }
 
-    if (!(email.incluides("@") && email.incluides("."))) {
+    if (!(email.includes("@") && email.includes("."))) {
         return res.status(400).json({ message: 'Campo invalido' });
         
     }

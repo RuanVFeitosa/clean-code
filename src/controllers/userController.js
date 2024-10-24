@@ -49,13 +49,18 @@ userControllers = {
     },
     getOne: async (req, res) => {
         try {
+
             const user = await userService.getById(req.params.id);
+
             if (!user) {
-                return res.status(200).json({
-                    message: "Usuario encontrado com sucesso",
-                    user
+                return res.status(400).json({
+                    message: "Usuario nao encontrado",
                 })
             }
+
+            return res.status(200).json({
+                user
+            })
 
         } catch (error) {
             return res.status(500).json({
@@ -66,12 +71,18 @@ userControllers = {
     }, 
     delete: async(req, res) => {
         try {
-             await userService.delete(req.params.id);
+
+             const user = await userService.delete(req.params.id);
+
              if (!user) {
                  return res.status(200).json({
-                    message: "Usuario deletado com sucesso"
+                    message: "Usuario nao encontrado"
                  })
              }
+
+             return res.status(200).json({
+                message : "Usuario deletado com sucesso"
+             })
         } catch{
             return res.status(500).json({
             message: "Ocorreu um erro no Servidor"
@@ -80,4 +91,4 @@ userControllers = {
     }
 }
 
-module.exports = userController
+module.exports = userControllers

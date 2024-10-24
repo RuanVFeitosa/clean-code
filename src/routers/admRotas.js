@@ -19,5 +19,9 @@ router.get('/:id', validateAdmId, admController.getOne ) // Paramentro id
 // Função buscar todos
 router.get('/', admController.getAll)
 
+router.post('/login', admController.login)
+
+router.post('/esqueci', admController.esqueciSenha)
+
 
 module.exports = router;

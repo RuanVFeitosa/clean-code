@@ -1,11 +1,11 @@
 require('dotenv').config(); // Arquivo => .env
 const express = require('express');
 const sequelize = require('./config/database');
-
+const router = require('./routers/router');
 const app = express(); // Iniciando servidor
 
 app.use(express.json()); // Resposta via JSON
-
+app.use('/', router);
 /**
  *  Criar -> POST / api / user / -- { objeto }
  *  Ler -> GET / api / user /
@@ -30,6 +30,6 @@ const PORT = process.env.PORT || 3000;
 // Ouvindo na possivel ou na porta 3000
 app.listen(PORT, () => {
     console.log('---------------------------');
-    console.log(`Running on http://${3000}`)
+    console.log(`Running on http://${PORT}`)
     console.log('---------------------------');
 });
